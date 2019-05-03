@@ -1,0 +1,19 @@
+{
+  "name": "unity-json-rpc",
+  "displayName": "UnityJsonRpc",
+  "version": "1.0.0",
+  "description": "Json rpc server implement for unity",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k0dep/unity-json-rpc.git"
+  },
+  "author": "Stanislav Petrov <sv.petrov@kodep.pro>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/k0dep/unity-json-rpc/issues"
+  },
+  "homepage": "https://github.com/k0dep/unity-json-rpc#readme",
+  "dependencies": {
+    "newtonsoft.json": "8.0.3"
+  }
+}
