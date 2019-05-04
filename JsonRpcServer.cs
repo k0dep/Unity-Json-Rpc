@@ -14,7 +14,6 @@ namespace UnityJsonRpc
         public void Stop()
         {
             server.Stop();
-            server.Close();
         }
 
         public ConcurrentQueue<JsonRpcRequest> Start(string address)
@@ -35,7 +34,15 @@ namespace UnityJsonRpc
             {
                 while (server.IsListening)
                 {
-                    var context = server.GetContext();
+                    HttpListenerContext context = null;
+                    try
+                    {
+                        context = server.GetContext();
+                    }
+                    catch
+                    {
+                        break;
+                    }
 
                     var data = "{}";
 
@@ -62,6 +69,7 @@ namespace UnityJsonRpc
 
                     queue.Enqueue(new JsonRpcRequest(context.Response, jrpcData));
                 }
+                server.Close();
             }).Start();
 
             return queue;
