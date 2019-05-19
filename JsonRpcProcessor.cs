@@ -97,9 +97,18 @@ namespace UnityJsonRpc
             return methodName;
         }
 
-        private string[] GetHelp()
+        private object[] GetHelp()
         {
-            return _methods.Select(row => row.Key).ToArray();
+            return _methods.Select(row => new
+            {
+                humanName = row.Key,
+                method = row.Key.Substring(0, row.Key.IndexOf('(')),
+                arguments = row.Value.Method.GetParameters().Select(p => new {
+                    name = p.Name,
+                    type = p.ParameterType.FullName
+                })
+            })
+            .ToArray();
         }
     }
 }
